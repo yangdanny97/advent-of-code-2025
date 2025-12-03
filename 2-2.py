@@ -1,0 +1,25 @@
+instructions = """11-22,95-115,998-1012,1188511880-1188511890,222220-222224,
+1698522-1698528,446443-446449,38593856-38593862,565653-565659,
+824824821-824824827,2121212118-2121212124"""
+
+ranges = [tuple(x.strip().split("-")) for x in instructions.split(",")]
+score = 0
+for start, end in ranges:
+    end_prefix_len = len(end) // 2
+    start_n = int(start)
+    end_n = int(end)
+    range_end = max(10 ** (end_prefix_len + 1), 1)
+    matched = set()
+    for i in range(1, range_end):
+        concat = str(i) + str(i)
+        while len(concat) < len(start):
+            concat += str(i)
+        n1 = int(concat)
+        n2 = int(concat + str(i))
+        if n1 >= start_n and n1 <= end_n and n1 not in matched:
+            matched.add(n1)
+            score += n1
+        if n2 >= start_n and n2 <= end_n and n2 not in matched:
+            matched.add(n2)
+            score += n2
+print(score)
