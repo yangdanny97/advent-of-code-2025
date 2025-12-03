@@ -10,7 +10,6 @@ total = 0
 for bank in banks:
     max_jolts = 0
     max_first_digit = 0
-    max_second_digit = 0
     for digit in bank:
         n = int(digit)
         if max_first_digit:
